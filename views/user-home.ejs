@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>WEB-DB</title>
+
+  <!-- css styles -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/signin-page.css">
+  <link rel="icon" href="images/lionhead-logo.png">
+
+  <!-- bootstrap j scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <!-- font style -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Roboto:ital,wght@0,900;1,100&display=swap" rel="stylesheet">
+
+  <!-- font Awesome   -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <section class="colored-section">
+    <div class="container-fluid ">
+
+      <nav class="navbar navbar-expand-lg navbar-light ">
+        <img class="logo-image" src="/images/lionhead-logo.png" alt="lion head image">
+        <h1 class="project-title1">WEB</h1>
+        <h1 class="project-title2">-db</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!-- user name here -->
+                <%= name %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+
+                <a class="dropdown-item" href="#">
+                    <%= mail %>
+                  </a>
+
+
+                <a class="dropdown-item" href="/logout">Log Out</a>
+              </div>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/user" id="navbarDropdownMenuLink">
+                <!-- user name here -->
+                Home
+              </a>
+
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <div class="row" id="user-home-content-row">
+    <div class="col-2 qs" id="vertical_nav1">
+
+        <br>
+        <button id="vb" class="btn btn-lg btn-success" type="button" name="button">
+          <a href="/user/add_project" style="color:white;">ADD PROJECT</a>
+        </button>
+        <br>
+        <button id="vb" class="btn btn-lg btn-success" type="button" name="button">
+          <a href="/user/delete_project" style="color:white" ;>DELETE PROJECT</a>
+        </button>
+        <br>
+
+        <%  if(entry_type == "project_entry" ){ %>
+
+        <button id="vb" class="btn btn-lg btn-success" type="button" name="button">
+          <a href="/user/<%=title%>/add_profile" style="color:white";>ADD PROFILE</a>
+        </button>
+        <br>
+        <% if(usage=="Educational"){ %>
+          <button id="vb" class="btn btn-lg btn-success" type="button" name="button">
+            <a href="/user/<%=title%>/upload_marks" style="color:white;">UPLOAD MARKS</a>
+          </button>
+
+      <% } else if (usage=="Management") { %>
+
+        <button id="vb" class="btn btn-lg btn-success" type="button" name="button">
+          <a href="/user/<%=title%>/upload_salary" style="color:white;">UPLOAD SALARY RECORD</a>
+        </button>
+      <% } %>
+      <% } %>
+
+
+    </div>
+
+    <%  if(entry_type == "welcome" && access == "yes"){ %>
+
+    <div class="ta">
+      <div class="">
+        <h3 class="form_title kl">MY PROJECTS</h3>
+        <br>
+      </div>
+
+      <% if(data !=null){ %>
+
+      <div class="tt">
+
+        <table class="table table-striped tab ">
+          <tr>
+            <th scope="col">Project Title</th>
+            <th scope="col">Project Admin</th>
+            <th scope="col">click to enter</th>
+          </tr>
+
+          <% data.forEach(function(p){ %>
+          <tr class="table-data">
+            <td ><%=p.project_title%>
+
+            </td>
+            <td ><%=name%>
+
+            </td>
+            <td >
+              <button class="btn btn-lg btn-success" type="button" name="button" id="new">
+                <a href="/user/<%=p.project_title%>" style="color:white" ;>Enter</a>
+              </button>
+
+            </td>
+          </tr>
+
+          <% }); %>
+        </table>
+
+      </div>
+    </div>
+
+    <% } %>
+
+
+    <% } else if(entry_type == "welcome" && access == "no"){ %>
+
+    <div class="col-8 add-form ">
+      <h2 class="greet kl">WELCOME !</h2>
+      <br>
+      <h3 class="greet kl">lets to do some work with fun</h3>
+    </div>
+
+    <% } else if(entry_type == "midway" && access == "add-project"){ %>
+
+    <div class="col-8 add-form ">
+      <h3 class="form_title kl">ADD PROJECT</h3>
+      <form action="/add_project" method="post">
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Project Title</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="title of project" name="project_title">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-form-label">Project Admin</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="<%= name %>" name="project_admin" readonly>
+          </div>
+        </div>
+        <div class="form-group select">
+          <div class="">
+            <label class="label1">Select the purpose</label>
+          </div>
+          <select class="form-control" id="exampleFormControlSelect1" required name="select">
+            <option disabled selected value>--Select an option--</option>
+            <option>Management</option>
+            <option>Educational</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-form-label">Project Discription</label>
+          <div class="col-sm-10">
+            <input type="textarea" class="form-control" placeholder="enter the project discription" name="projet_discrpition">
+          </div>
+        </div>
+
+        <div class="wrapper">
+          <button class="btn btn-lg btn-success " type="submit" name="add_project">Add Project</button>
+        </div>
+      </form>
+    </div>
+
+    <% } else if(entry_type == "midway" && access =="delete_project"){ %>
+
+    <div class="col-8 add-form">
+      <h3 class="form_title kl">DELETE  PROJECT</h3>
+      <form action="/delete_project" method="post">
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Project Title</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="project title" name="project_title">
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Project Admin</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="project admin" name="project_admin">
+          </div>
+        </div>
+        <div class="wrapper">
+          <button class="btn btn-lg btn-danger">Delete Project</button>
+        </div>
+      </form>
+    </div>
+
+    <% } %>
+
+    <%  if(entry_type == "project_entry" && profile_type=="nil" && access=="goodbye"){ %>
+
+    <div class="col-8 add-form ">
+      <h2 class="greet">Add Profile To The Project</h2>
+    </div>
+
+    <% } else if(entry_type == "project_entry" && profile_type=="tonne" && access=="goodbye"){ %>
+
+    <div class="">
+      <div class="">
+        <h3 class="form_title kl"><%= title %> Project Details</h3>
+        <br>
+      </div>
+
+      <% if(data !=null){ %>
+
+      <div class="tt">
+
+        <table class="table table-striped tab">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+
+          <% data.forEach(function(p){ %>
+
+          <tr class="table-data">
+            <td ><%=p.id%></td>
+            <td><%=p.first_name%></td>
+            <td><%=p.last_name%></td>
+            <td>
+              <button class="btn btn-lg btn-success" type="button" name="button" id="new">
+                <a href="/user/<%= title %>/<%=p.email%>/view" style="color:white" ; onclick="console.log(" hello")">view</a>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-success" type="button" name="button" id="new">
+                <a href="/user/<%= title %>/<%=p.email%>/update" style="color:white" ; onclick="console.log(" hello")">update</a>
+              </button>
+            </td>
+            <td>
+              <button class="btn btn-lg btn-success" type="button" name="button" id="new">
+                <a href="/user/<%=p.id%>/view_marks" style="color:white"; >marks</a>
+              </button>
+            </td>
+            <td>
+
+                <form action="/user/profile/delete" method="post">
+                  <button class="btn btn-lg btn-danger" name="delete" value="<%=p._id%>" type="submit" id="new">
+                    delete
+                  </button>
+                </form>
+
+            </td>
+          </tr>
+
+          <% }); %>
+
+        </table>
+
+      </div>
+    </div>
+
+    <% } %>
+
+    <% } else if(entry_type == "project_entry" && profile_type=="add" && access=="goodbye"){ %>
+
+    <div class="col-8 add-form">
+      <h3 class="form_title kl">ADD PROFILE</h3>
+      <form action="/add_profile" method="post">
+        <div class="form-group">
+          <label class="col-sm-2 col-form-label">Id</label>
+          <div class="col-sm-10">
+            <input type="Number" class="form-control" placeholder="enter Id" name="id" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-form-label">First Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="enter first name" name="fname" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-form-label">Last Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="enter last name" name="lname" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-2 col-form-label">Age</label>
+          <div class="col-sm-10">
+            <input type="number" class="form-control" placeholder="enter the age" name="age" required>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" placeholder="enter the email-id" name="email" required>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Organization Name</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="enter the organization name" name="org" required>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Project Title</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="project_title" placeholder="<%= title %>" readonly>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Project Admin</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" name="project_admin" placeholder="<%= admin %>" readonly>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Address</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="enter the address" name="address" required>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Contact No.</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="enter contact no." name="contact" required>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Year Of Joining</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="enter the year of joining" name="join" required>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label class="col-sm-2 col-form-label">Remark</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" placeholder="remark if any" name="remark">
+          </div>
+        </div>
+        <div class="wrapper">
+          <button class="btn btn-lg btn-success">Add Profile</button>
+        </div>
+      </form>
+    </div>
+
+    <% } else if(entry_type == "project_entry" && profile_type=="veiw" && access=="goodbye"){ %>
+
+
+          <div class="col-8 add-form">
+            <h3 class="form_title"> PROFILE</h3>
+            <form >
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Id</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" value="<%= data.id %>" name="id" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.first_name %>" name="fname" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.last_name %>" name="lname" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Email-Id</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" value="<%= data.email %>" name="email" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Age</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" value="<%= data.age %>" name="age" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Organization Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.organization %>" name="org" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Project Title</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="project_title" value=<%= title %>" readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Project Admin</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="project_admin" value="<%= admin %>" readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Address</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.address %>" name="address" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Contact No.</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.contact %>" name="contact" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Year Of Joining</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.joining %>" name="join" required readonly>
+                </div>
+              </div>
+              <div class="form-group ">
+                <label class="col-sm-2 col-form-label">Remark</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="<%= data.remark %>" name="remark" readonly>
+                </div>
+              </div>
+
+            </form>
+
+            <div class="wrapper ">
+              <button class="btn btn-lg btn-success" type="button" name="button" id="new">
+                <a href="/user/<%= title %>/<%=data.email%>/update" style="color:white" ; onclick="console.log(" hello")">update</a>
+              </button>
+
+
+</div>
+<div class="wrapper ">
+              <form action="/user/profile/delete" method="post">
+
+                <button class="btn btn-lg btn-danger" name="delete" value="<%=data._id%>" type="submit" id="new">
+                  delete
+                </button>
+
+
+              </form>
+
+            </div>
+
+          </div>
+
+    <% } else if(entry_type == "project_entry" && profile_type=="update"){ %>
+
+      <div class="col-8 add-form">
+        <h3 class="form_title">ADD PROFILE</h3>
+        <form action="/user/update_profile" method="post">
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" value="<%= data.id %>" name="id" required readonly>
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">First Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.first_name %>" name="fname" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Last Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.last_name %>" name="lname" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Email-Id</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" value="<%= data.email %>" name="email" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Age</label>
+            <div class="col-sm-10">
+              <input type="number" class="form-control" value="<%= data.age %>" name="age" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Organization Name</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.organization %>" name="org" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Project Title</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="project_title" value="<%= title %>" readonly>
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Project Admin</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" name="project_admin" value="<%= admin %>" readonly>
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Address</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.address %>" name="address" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Contact No.</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.contact %>" name="contact" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Year Of Joining</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.joining %>" name="join" required >
+            </div>
+          </div>
+          <div class="form-group ">
+            <label class="col-sm-2 col-form-label">Remark</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="<%= data.remark %>" name="remark" >
+            </div>
+          </div>
+
+          <div class="wrapper">
+            <button class="btn btn-lg btn-success">update Profile</button>
+          </div>
+
+        </form>
+      </div>
+
+    <% } %>
+
+
+  </div>
+  <!--outter most div -->
+
+</body>
+
+</html>

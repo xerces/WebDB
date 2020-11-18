@@ -1,0 +1,273 @@
+body{
+  background-color:#f7f7f7;
+  
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "avenir",helvetica,sans-serif;;
+}
+
+.about:hover{
+  color: white;
+}
+.logo-image{
+  height: 60px;
+  width: 60px;
+  border-radius: 100%;
+}
+
+.heading1{
+  font-family: 'Pacifico', cursive;
+  display: inline-block;
+  color: #5ae6e2;
+  margin-top: 40x;
+  font-size: 150px;
+}
+
+.heading2{
+  font-family: 'Source Sans Pro', sans-serif;
+  display: inline-block;
+  color:#ff9531;
+  font-size: 140px;
+}
+
+
+.project-title1{
+  font-family: 'Pacifico', cursive;
+  display: inline-block;
+  color: #2d7574;
+}
+
+.project-title2{
+  font-family: 'Source Sans Pro', sans-serif;
+  display: inline-block;
+  color: #ff9531;
+}
+
+.container-fluid{
+  padding-left: 0;
+  padding-right: 0;
+}
+.navbar{
+  background-color: #f7f7f7;
+
+}
+a:visited{
+    color: black;
+}
+
+.top-container{
+  margin-left: 100px;
+  margin-top: 90px;
+}
+
+.punch-line{
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 40px;
+  color: white;
+  padding-bottom: 40px;
+}
+
+.image-section{
+  background-image: url('https://blog.cmecorp.com/hubfs/supply%20chain.jpg');
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+    background-size: 100% 100%;
+    padding-bottom: 300px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.social-icon{
+  text-align: center;
+  margin: 10px;
+}
+
+.feature{
+  text-align: center;
+  margin: 50px auto;
+}
+
+.feature-icon{
+  margin-bottom: 10px;
+}
+
+.feature-item{
+  margin: 0 10 0 10;
+  border-top-style: outset;
+  border-top-width: 4px;
+  border-color: #04c9c6;
+}
+
+.signup-button{
+  color: white;
+  background-color: #ff9531;
+  margin: auto 10px;
+
+}
+
+.signin-button{
+  color: #04c9c6;
+  margin: auto 10px;
+}
+
+.discription-box{
+  border-top-style: outset;
+  border-width: 0;
+  border-top-width: 4px;
+  border-color: #04c9c6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0,0,0,0.19);
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.signin-button:hover{
+  background-color: #099996;
+}
+
+.title-image{
+  width: 300px;
+}
+
+.second{
+ margin-left: 0;
+}
+
+.card{
+  border-top-style: outset;
+  border-width: 0;
+  border-top-width: 4px;
+  border-color: #04c9c6;
+  margin-left: 20px;
+  margin-right: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0,0,0,0.1);
+}
+
+.card-body{
+  text-align: center;
+  padding-left: 40px;
+  padding-right: 40px;
+
+}
+
+.card-title{
+  margin-top: 20px;
+}
+
+.left-float{
+  float:left;
+}
+
+.right-float{
+  float: right;
+}
+
+.left-image{
+  margin-left: 100px;
+  width: 220px;
+  height: 300px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+  border-radius:20%;
+padding: 10px;
+background-color:#ff9531;
+}
+
+.right-image{
+  width: 220px;
+  height: 300px;
+margin-left: 200px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0,0,0,0.2);
+  border-radius: 20%;
+padding: 10px;
+background-color:#2d7574;
+}
+.d1
+{color:#2d7574;}
+.d2
+{
+  color:#ff9531;
+}
+
+
+.float-text2{
+  padding-left: 300px;
+}
+
+.row{
+  text-align: left;
+  width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
+}
+
+
+
+
+
+
+.discription{
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.discription-text{
+  font-family: 'Open Sans', sans-serif;
+}
+
+.discription-heading{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+}
+
+#footer{
+  background-color: #2d7574;
+  text-align: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  line-height: 3;
+}
+.footer-image{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.social-icon{
+  color: #ff9531!important;
+  font-size: 20px;
+}
+
+.Copyright{
+  color: white;
+}
+
+.social-icon:hover{
+  color: red!important;
+}
+.fas:hover
+{
+  color: #ff9531;
+}
+.fas
+{
+  color:#2d7574;
+}
+.abouth
+{
+  text-align: center;
+}
+.abo{
+  background-color: #ff9531;
+}
+.boo{
+    background-color: #2d7574;
+
+}
+.poo{
+  color: white;
+}
+.dev
+{
+  background-color: #ff9531;
+}

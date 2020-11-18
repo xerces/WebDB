@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>WEB-DB</title>
+
+  <!-- css styles -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/signin-page.css">
+  <link rel="icon" href="images/lionhead-logo.png">
+
+  <!-- bootstrap j scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <!-- font style -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Roboto:ital,wght@0,900;1,100&display=swap" rel="stylesheet">
+
+  <!-- font Awesome   -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <section class="colored-section">
+    <div class="container-fluid ">
+
+      <nav class="navbar navbar-expand-lg navbar-light ">
+        <img class="logo-image" src="/images/lionhead-logo.png" alt="lion head image">
+        <h1 class="project-title1">WEB</h1>
+        <h1 class="project-title2">-db</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <!-- user name here -->
+                <%= name %>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">
+                  <!-- email here -->
+                  <%= mail %>
+                </a>
+
+                <a class="dropdown-item" href="/sign_in">Log Out</a>
+              </div>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link" href="/user" id="navbarDropdownMenuLink">
+                <!-- user name here -->
+                Home
+              </a>
+
+            </li>
+
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+<div class="col-8 add-form ">
+
+  <form class="" action="/user/upload_marks" method="post">
+
+<!-- upper div -->
+    <div class="">
+
+      <h3 class="kl">Upload Marks</h3>
+      <div class="form-group ">
+        <label class="col-sm-2 col-form-label">Exam Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="exam name" name="exam_name">
+        </div>
+      </div>
+      <div class="form-group ">
+        <label class="col-sm-2 col-form-label">Exam Date</label>
+        <div class="col-sm-10">
+          <input type="month" class="form-control" placeholder="date" name="date">
+        </div>
+      </div>
+      <div class="form-group ">
+        <label class="col-sm-2 col-form-label">Exam Subject</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" placeholder="subject" name="subject">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- middle div -->
+
+    <div class="">
+      <% if(data !=null){ %>
+
+        <table class="table tab ">
+          <tr>
+            <th class="th" scope="col">Id</th>
+            <th class="th" scope="col">First Name</th>
+            <th class="th" scope="col">Last Name</th>
+            <th class="th" scope="col">Marks</th>
+          </tr>
+
+          <% data.forEach(function(p){ %>
+          <tr class="table-data">
+            <td >
+              <input class="input" type="text" name="id" value="<%=p.id%>" readonly>
+
+            </td>
+            <td ><%=p.first_name%></td>
+            <td><%=p.last_name%></td>
+            <td>
+              <input type="number" name="mark" >
+            </td>
+
+          </tr>
+
+          <% }); %>
+
+        </table>
+
+      <% } %>
+
+     </div>
+
+
+    <!-- bottom div -->
+
+    <div class="wrapper">
+
+      <button class="btn btn-lg btn-success">UPLOAD</button>
+
+    </div>
+
+  </form>
+
+</div>
+
+</body>
+
+</html>

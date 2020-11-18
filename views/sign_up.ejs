@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>SIGN-UP-WEB-db</title>
+
+  <link rel="icon" href="images/lionhead-logo.png">
+
+  <!-- google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Source+Sans+Pro:ital@1&display=swap" rel="stylesheet">
+
+  <!-- css link -->
+
+  <link rel="stylesheet" href="css/signup.css">
+
+  <!-- Font Awesome -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <!--bootstrap link -->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+</head>
+
+<body>
+  <div class="base container-fluid">
+
+    <div class="header">
+      <nav class="navbar navbar-expand-lg navbar-light ">
+        <img class="logo-image" src="images/lionhead-logo.png" alt="lion head image">
+        <h1 class="project-title1">WEB</h1>
+        <h1 class="project-title2">-db</h1>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+          <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item">
+              <button type="button" class="btn  btn-lg home-button"><i class="fa fa-home" aria-hidden="true"></i> <a style="text-decoration: none;"href="/home">Home</a></button>
+            </li>
+
+          </ul>
+
+      </nav>
+    </div>
+
+    <div class="signin">
+
+      <form class="form-signin"  action="/signup" method="POST">
+
+        <h1 class="h3 mb-3 font-weight-normal " style="color: white;" id="signup-head">Register now</h1>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" class="form-control" id="user" placeholder="Username" name="username" required autofocus>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" class="form-control" id="user" placeholder="Email address" name="email" required >
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" class="form-control" id="user" placeholder="Set Password" name="password" required>
+
+
+        <div class="h" name="gh">
+
+          <button class="btn btn-lg btn-primary btn-block lf" id="signbtn" type="submit" name="sign" value="register">Register now</button>
+
+          <!-- <h6 class="acc" style="color: white;"> dont't have account</h6>
+              <button class="btn btn-lg btn-primary btn-block lf" type="submit"name="sign" value="register">Register Now</button> -->
+
+        </div>
+
+        <p class="" id="copyright">&copy; 2020-2021</p>
+      </form>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
