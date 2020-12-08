@@ -9,8 +9,9 @@
   "author": "shashank",
   "license": "ISC",
   "engines": {
-    "node": "12.18.3"
-  },
+      "node": "12.18.3"
+    },
+
   "dependencies": {
     "alert": "^5.0.6",
     "bcrypt": "^5.0.0",
