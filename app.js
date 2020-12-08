@@ -26,7 +26,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-mongoose.connect("mongodb://localhost:27017/webDB",{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false  });
+mongoose.connect("mongodb+srv://admin-101:test123@cluster0.ijtgy.mongodb.net/webDB",{useNewUrlParser:true,useUnifiedTopology: true,useFindAndModify: false  });
 
 
    // sechemas
@@ -72,6 +72,21 @@ const marksSchema = new mongoose.Schema({
   exam_marks:Number
 });
 
+const salarySchema = new mongoose.Schema({
+  profile_id:String,
+  deposit_date:Date,
+
+  salary_rs:Number
+});
+
+
+const leaveSchema = new mongoose.Schema({
+  date_from:Date,
+  date_to:Date,
+  profile_id:String,
+});
+
+
 
 
 
@@ -89,7 +104,9 @@ const Profile= new mongoose.model("profile",profileSchema);
 
 const Mark= new mongoose.model("mark",marksSchema);
 
+const Salary= new mongoose.model("salary",salarySchema);
 
+const Leave= new mongoose.model("leave",leaveSchema);
          // all the variables
 
 
@@ -224,6 +241,7 @@ app.get("/user/:project_title",function(req,res){
           if(err){
             console.log(err);
           }else{
+            console.log(usage);
         res.render("user-home.ejs",
         {name:_.capitalize(username),mail:mail,entry_type:"project_entry",access:"goodbye",profile_type:"tonne",data:t,title:project_title,usage:usage});
       }
@@ -301,6 +319,61 @@ app.get("/user/:title/:email/update",function(req,res){
 }
 });
 
+app.get("/user/:id/view_marks",function(req,res){
+    if(req.isAuthenticated()){
+  console.log(req.params.id);
+  Mark.find({profile_id:req.params.id},function(err,x){
+    if(err){
+      console.log(err);
+    } else{
+      console.log("/user/:id/view_marks");
+      console.log(x);
+      res.render("profile_data.ejs",{name:_.capitalize(username),mail:mail,data:x});
+    }
+  }).sort([["exam_date",1]]);
+} else {
+  res.redirect("/sign_in");
+}
+});
+
+
+
+
+
+app.get("/user/:id/view_salary",function(req,res){
+    if(req.isAuthenticated()){
+  console.log(req.params.id);
+  Salary.find({profile_id:req.params.id},function(err,x){
+    if(err){
+      console.log(err);
+    } else{
+      console.log("/user/:id/view_salary");
+      console.log(x);
+      res.render("salary_data.ejs",{name:_.capitalize(username),mail:mail,data:x});
+    }
+  }).sort([["deposit_date",1]]);
+} else {
+  res.redirect("/sign_in");
+}
+});
+
+app.get("/user/:id/view_leave",function(req,res){
+    if(req.isAuthenticated()){
+  console.log(req.params.id);
+  Leave.find({profile_id:req.params.id},function(err,x){
+    if(err){
+      console.log(err);
+    } else{
+      console.log("/user/:id/view_leave");
+      console.log(x);
+      res.render("leave_data.ejs",{name:_.capitalize(username),mail:mail,data:x});
+    }
+  }).sort([["exam_date",1]]);
+} else {
+  res.redirect("/sign_in");
+}
+});
+
 app.get("/user/:title/upload_marks",function(req,res){
   if(req.isAuthenticated()){
   Profile.find({title:req.params.title},function(err,t){
@@ -316,18 +389,33 @@ app.get("/user/:title/upload_marks",function(req,res){
 }
 });
 
-app.get("/user/:id/view_marks",function(req,res){
-    if(req.isAuthenticated()){
-  console.log(req.params.id);
-  Mark.find({profile_id:req.params.id},function(err,x){
+app.get("/user/:title/upload_salary",function(req,res){
+  if(req.isAuthenticated()){
+  Profile.find({title:req.params.title},function(err,t){
     if(err){
       console.log(err);
-    } else{
-      console.log("/user/:id/view_marks");
-      console.log(x);
-      res.render("profile_data.ejs",{name:_.capitalize(username),mail:mail,data:x});
+    }else{
+      console.log("/user/:title/upload_salary");
+      res.render("salary.ejs",{name:_.capitalize(username),mail:mail,data:t,id:id,i:0});
     }
-  }).sort([["exam_date",1]]);
+  }).sort([["id",1]]);
+} else {
+  res.redirect("/sign_in");
+}
+});
+
+
+
+app.get("/user/:title/upload_leave",function(req,res){
+  if(req.isAuthenticated()){
+  Profile.find({title:req.params.title},function(err,t){
+    if(err){
+      console.log(err);
+    }else{
+      console.log("/user/:title/upload_leave");
+      res.render("leave.ejs",{name:_.capitalize(username),mail:mail,data:t,id:id,i:0});
+    }
+  }).sort([["id",1]]);
 } else {
   res.redirect("/sign_in");
 }
@@ -351,11 +439,13 @@ app.post("/signup",function(req,res){
   Login.register({username: req.body.username,email: req.body.email}, req.body.password,function(err,user){
     if (err){
       console.log(err);
+
       res.redirect("/sign_up");
     }
     else{
       passport.authenticate("local")(req,res,function(){
         console.log("/signup post");
+
         res.redirect("/sign_in");
       });
 
@@ -393,7 +483,7 @@ app.post("/signin",function(req,res){
   username=req.body.username;
 
 
-  
+
   const user= new Login({
     username:req.body.username,
     password:req.body.password
@@ -402,6 +492,7 @@ app.post("/signin",function(req,res){
   req.login(user,function(err){
     if(err){
       console.log(err);
+
     } else{
       passport.authenticate("local")(req,res,function(){
         console.log("/signin post");
@@ -412,6 +503,7 @@ app.post("/signin",function(req,res){
             }
           }
         })
+
         res.redirect("/user");
       });
     }
@@ -458,6 +550,7 @@ app.post("/add_project",function(req,res){
             project_use:req.body.select,
             projet_discrpition:req.body.projet_discrpition
           });
+          console.log(req.body.select);
           tempData.save();
           console.log(tempData._id);
           console.log("succesfully added");
@@ -517,6 +610,7 @@ app.post("/add_profile",function(req,res){
     joining:req.body.join,
     remark:req.body.remark
   });
+
   console.log(req.body.id);
   console.log(req.body.fname);
   console.log(req.body.lname);
@@ -585,6 +679,77 @@ app.post("/user/update_profile",function(req,res){
     });
 });
 
+
+app.post("/user/upload_leave",function(req,res){
+  console.log("/user/upload_leave");
+  console.log(req.body.datef);
+  console.log(req.body.datet);
+  var tempDatef=req.body.datef;
+    var tempDatet=req.body.datet;
+
+
+  console.log(req.body.id);
+
+  var b;
+  if(Array.isArray(req.body.id))
+  {
+  for(b=0; b<req.body.id.length;b++){
+    var temp_profile_leave=new Leave({
+      profile_id:req.body.id[b],
+      date_from:tempDatef[b],
+      date_to:tempDatet[b]
+    });
+    temp_profile_leave.save();
+  }
+}
+else{
+  var temp_profile_leave=new Leave({
+    profile_id:req.body.id,
+    date_from:tempDatef,
+    date_to:tempDatet
+  });
+    temp_profile_leave.save();
+}
+  res.redirect("/user/"+project_title);
+});
+
+
+
+
+app.post("/user/upload_salary",function(req,res){
+  console.log("/user/upload_salary");
+  console.log(req.body.date);
+  var tempDate=req.body.date;
+
+
+  console.log(req.body.id);
+  console.log(req.body.salary);
+  var l;
+    if(Array.isArray(req.body.id))
+    {
+  for(l=0; l<req.body.id.length; l++){
+    var temp_profile_salary=new Salary({
+      profile_id:req.body.id[l],
+      deposit_date:tempDate,
+
+      salary_rs:req.body.salary[l]
+    });
+    temp_profile_salary.save();
+  }
+}
+else{
+  var temp_profile_salary=new Salary({
+    profile_id:req.body.id,
+    deposit_date:tempDate,
+
+    salary_rs:req.body.salary
+  });
+  temp_profile_salary.save();
+}
+
+  res.redirect("/user/"+project_title);
+});
+
 app.post("/user/upload_marks",function(req,res){
   console.log("/user/upload_marks");
   console.log(req.body.date);
@@ -596,6 +761,8 @@ app.post("/user/upload_marks",function(req,res){
   console.log(req.body.id);
   console.log(req.body.mark);
   var j;
+  if(Array.isArray(req.body.id))
+  {
   for(j=0; j<req.body.id.length; j++){
     var temp_profile_mark=new Mark({
       profile_id:req.body.id[j],
@@ -606,8 +773,21 @@ app.post("/user/upload_marks",function(req,res){
     });
     temp_profile_mark.save();
   }
+}
+else{
+  var temp_profile_mark=new Mark({
+    profile_id:req.body.id,
+    exam_date:tempDate,
+    exam_name:exameName,
+    exam_subject:subject,
+    exam_marks:req.body.mark
+  });
+  temp_profile_mark.save();
+}
   res.redirect("/user/"+project_title);
 });
+
+
 
 app.listen(3000, function() {
   console.log("Server started succesfully");
